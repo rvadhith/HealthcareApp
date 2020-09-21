@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.dto.EndpointsDTO;
 import com.ecommerce.model.Endpoints;
 import com.ecommerce.service.EndpointServices;
 
@@ -22,8 +23,8 @@ public class EndpointController {
 	EndpointServices endpointservices;
 	
 	@PostMapping(path="/addEndpoints")
-	public ResponseEntity<Endpoints> addEndpoint(@RequestBody Endpoints endpoint){
-		Endpoints addedEndpoint = endpointservices.addEndpoint(endpoint);
+	public ResponseEntity<Endpoints> addEndpoint(@RequestBody EndpointsDTO endpointsdto){
+		Endpoints addedEndpoint = endpointservices.addEndpoint(endpointsdto);
 		return new ResponseEntity<Endpoints>(addedEndpoint, HttpStatus.CREATED);
 	}
 	

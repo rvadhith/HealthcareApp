@@ -1,41 +1,18 @@
-package com.ecommerce.model;
+package com.ecommerce.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="tests")
-public class Tests {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TestDTO {
 	private Long id;
 	private String name;
 	private LocalDate startDate;
 	private LocalDate validTillDate;
 	private int availableSeats;
 	private double cost;
-	@ManyToOne
-	@JoinColumn(name="diagnosticcentre_id")
-	private DiagnosticsCentre diagnosticcentre;
-	@ManyToMany
-	@JoinColumn(name="endpoints_id")
-	private List<Endpoints> endpoints;
+	private Long diagnosticcentre_id;
+	private List<Long> endpoints_id;
 	
-	
-	public Tests() {
-		super();
-	}
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -72,16 +49,16 @@ public class Tests {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	public DiagnosticsCentre getDiagnosticcentre() {
-		return diagnosticcentre;
+	public Long getDiagnosticcentre_id() {
+		return diagnosticcentre_id;
 	}
-	public void setDiagnosticcentre(DiagnosticsCentre diagnosticcentre) {
-		this.diagnosticcentre = diagnosticcentre;
+	public void setDiagnosticcentre_id(Long diagnosticcentre_id) {
+		this.diagnosticcentre_id = diagnosticcentre_id;
 	}
-	public List<Endpoints> getEndpoints() {
-		return endpoints;
+	public List<Long> getEndpoints_id() {
+		return endpoints_id;
 	}
-	public void setEndpoints(List<Endpoints> endpoints) {
-		this.endpoints = endpoints;
+	public void setEndpoints_id(List<Long> endpoints_id) {
+		this.endpoints_id = endpoints_id;
 	}
 }

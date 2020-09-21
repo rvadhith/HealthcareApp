@@ -1,5 +1,6 @@
 package com.ecommerce.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,25 +11,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="endpoint")
-public class Endpoints {
-	
-	
+public class Endpoints {	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name="DiagnosticsCentre",joinColumns = { @JoinColumn(name="id")} )
-    
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="diagnosticcentre_id")  
 	private DiagnosticsCentre diagnosticcentre;
-	
 	private String name;
-	
-	@ManyToOne
-    @JoinColumn(name="tests_id")
-	private Tests tests;
 	
 	public Long getId() {
 		return id;
@@ -39,13 +37,18 @@ public class Endpoints {
 	public DiagnosticsCentre getDiagnosticcentre() {
 		return diagnosticcentre;
 	}
-	public void setDiagnosticcentre(DiagnosticsCentre diagnosticcentre) {
-		this.diagnosticcentre = diagnosticcentre;
+	public void setDiagnosticcentre(DiagnosticsCentre diagnosticCenter) {
+		this.diagnosticcentre = diagnosticCenter;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Endpoints [id=" + id + ", diagnosticcentre=" + diagnosticcentre + ", name=" + name +"]";
 	}
 }

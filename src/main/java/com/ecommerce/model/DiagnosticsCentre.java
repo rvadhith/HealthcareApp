@@ -6,11 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="diagnosticscentre")
@@ -23,10 +21,6 @@ public class DiagnosticsCentre {
 	private String password;
 	private String name;
 	private String location;
-	@OneToMany(mappedBy="diagnosticcentre")
-	private List<Endpoints> endpoints;
-	@OneToMany(mappedBy="diagnosticcentre")
-	private List<Tests> tests;
 	
 	public Long getId() {
 		return id;
@@ -58,4 +52,12 @@ public class DiagnosticsCentre {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	@Override
+	public String toString() {
+		return "DiagnosticsCentre [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+				+ ", location=" + location + "]";
+	}
 }
+
+

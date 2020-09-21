@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.ecommerce.dto.TestDTO;
 import com.ecommerce.model.Tests;
 import com.ecommerce.service.TestServices;
 
@@ -22,8 +22,8 @@ public class TestController {
 	TestServices testservices;
 	
 	@PostMapping(path="/addTests")
-	public ResponseEntity<Tests> addEndpoint(@RequestBody Tests tests){
-		Tests addedTests = testservices.addTest(tests);
+	public ResponseEntity<Tests> addTests(@RequestBody TestDTO testdto){
+		Tests addedTests = testservices.addTest(testdto);
 		return new ResponseEntity<Tests>(addedTests, HttpStatus.CREATED);
 	}
 	
